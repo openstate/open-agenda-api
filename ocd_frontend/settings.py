@@ -16,10 +16,10 @@ DEFAULT_SEARCH_SIZE = 10
 MAX_SEARCH_SIZE = 100
 
 # The name of the index containing documents from all sources
-COMBINED_INDEX = 'owa_combined_index'
+COMBINED_INDEX = 'oaa_combined_index'
 
 # The default prefix used for all data
-DEFAULT_INDEX_PREFIX = 'owa'
+DEFAULT_INDEX_PREFIX = 'oaa'
 
 # The fields which can be used for sorting results via the REST API
 SORTABLE_FIELDS = {
@@ -183,12 +183,12 @@ AVAILABLE_HIGHLIGHTS = {
 ALLOWED_DATE_INTERVALS = ('day', 'week', 'month', 'quarter', 'year')
 
 # Name of the Elasticsearch index used to store URL resolve documnts
-RESOLVER_URL_INDEX = 'owa_resolver'
+RESOLVER_URL_INDEX = 'oaa_resolver'
 
 # Determines if API usage events should be logged
 USAGE_LOGGING_ENABLED = True
 # Name of the Elasticsearch index used to store logged events
-USAGE_LOGGING_INDEX = 'owa_usage_logs'
+USAGE_LOGGING_INDEX = 'oaa_usage_logs'
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 DUMPS_DIR = os.path.join(os.path.dirname(ROOT_PATH), 'dumps')
@@ -202,7 +202,7 @@ API_URL = 'http://frontend:5000/v0/'
 
 # URL where collection dumps are hosted. This is used for generating full URLs
 # to dumps in the /dumps endpoint
-DUMP_URL = 'http://dumps.openwob.nl/'
+DUMP_URL = 'http://dumps.openagenda.nl/'
 
 LOGGING = {
     'version': 1,

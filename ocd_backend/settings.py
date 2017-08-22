@@ -63,16 +63,16 @@ TEMP_DIR_PATH = os.path.join(ROOT_PATH, 'temp')
 SOURCES_CONFIG_FILE = os.path.join(ROOT_PATH, 'sources/*.json')
 
 # The name of the index containing documents from all sources
-COMBINED_INDEX = 'owa_combined_index'
+COMBINED_INDEX = 'oaa_combined_index'
 
 # The default prefix used for all data
-DEFAULT_INDEX_PREFIX = 'owa'
+DEFAULT_INDEX_PREFIX = 'oaa'
 
-RESOLVER_BASE_URL = 'http://api.openwob.nl/v0/resolve'
-RESOLVER_URL_INDEX = 'owa_resolver'
+RESOLVER_BASE_URL = 'http://api.openagenda.nl/v0/resolve'
+RESOLVER_URL_INDEX = 'oaa_resolver'
 
 # The User-Agent that is used when retrieving data from external sources
-USER_AGENT = 'Open Wob API/0.1 (+https://www.openwob.nl/)'
+USER_AGENT = 'Open Agenda API/0.1'
 
 # URL where of the API instance that should be used for management commands
 # Should include API version and a trailing slash.

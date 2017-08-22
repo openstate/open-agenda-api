@@ -63,7 +63,7 @@ def do_humanize(s):
 
 
 class BackendAPI(object):
-    URL = 'http://api.openwob.nl/v0'
+    URL = 'http://api.openagenda.nl/v0'
 
     def sources(self):
         return requests.get('%s/sources' % (self.URL,)).json()

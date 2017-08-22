@@ -5,15 +5,15 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/opt/owa
+      - .:/opt/oaa
     links:
       - redis:redis
       - elasticsearch:elasticsearch
       - frontend:frontend
     networks:
-      - owa
+      - oaa
     mem_limit: 10g
-    command: /opt/owa/bin/backend.sh
+    command: /opt/oaa/bin/backend.sh
   frontend:
     build:
       context: ocd_frontend
@@ -21,7 +21,7 @@ services:
     links:
       - elasticsearch:elasticsearch
     networks:
-      - owa
+      - oaa
       - nginx-load-balancer
   redis:
     image: "redis:${REDIS_VERSION}"
@@ -29,7 +29,7 @@ services:
       - net.core.somaxconn=65535
     mem_limit: 4g
     networks:
-      - owa
+      - oaa
   elasticsearch:
     image: "docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}"
     environment:
@@ -49,7 +49,7 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data
     networks:
-      - owa
+      - oaa
   app:
     build:
       context: app
@@ -58,12 +58,12 @@ services:
       - app:/opt/app
     restart: always
     networks:
-      - owa
+      - oaa
 volumes:
   esdata:
     driver: local
 networks:
-  owa:
+  oaa:
   nginx-load-balancer:
     external:
       name: docker_nginx-load-balancer

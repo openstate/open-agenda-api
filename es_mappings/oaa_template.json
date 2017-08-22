@@ -1,5 +1,5 @@
 {
-    "template": "owa_*",
+    "template": "oaa_*",
     "settings": {
         "index": {
             "number_of_shards": 1,

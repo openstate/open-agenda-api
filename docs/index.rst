@@ -1,7 +1,7 @@
-Open Wob API Documentation
+Open Agenda API Documentation
 ===================================
 
-Welcome to the documentation of the Open Wob API. The Open Wob API is the place where Wob data is made available for others to reuse. For more general information about the Open Wob project, see the main website: https://www.openwob.nl/.
+Welcome to the documentation of the Open Agenda API. The Open Agenda API is the place where Agenda data is made available for others to reuse.
 
 Background
 ----------
@@ -14,7 +14,7 @@ Background
    changes
 
 
-Using the Open Wob API
+Using the Open Agenda API
 ----------------------------------
 
 .. toctree::

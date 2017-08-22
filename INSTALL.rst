@@ -1,4 +1,4 @@
-Open Wob API install notes
+Open Agenda API install notes
 ######################################
 
 .. contents::
@@ -9,12 +9,12 @@ Installation instructions
 Install using Docker
 ------------
 
-Using `Docker Compose<https://docs.docker.com/compose/install/>`_ is by far the easiest way to spin up a development environment and get started with contributing to the Open Wob API. The following has been tested to work with Docker 1.0.1 and up.
+Using `Docker Compose<https://docs.docker.com/compose/install/>`_ is by far the easiest way to spin up a development environment and get started with contributing to the Open Agenda API. The following has been tested to work with Docker 1.0.1 and up.
 
-1. Clone the Open Wob API git repository::
+1. Clone the Open Agenda API git repository::
 
-   $ git clone https://github.com/openstate/open-wob-api.git
-   $ cd open-wob-api/
+   $ git clone https://github.com/openstate/open-agenda-api.git
+   $ cd open-agenda-api/
 
 2. Build and start the containers::
 
@@ -22,7 +22,7 @@ If you're in production:
 
    $ docker-compose up -d
 
-If you're in development (this adds `command: /opt/owa/bin/backend.sh` so celery gets reloaded on file changes):
+If you're in development (this adds `command: /opt/oaa/bin/backend.sh` so celery gets reloaded on file changes):
 
    $ docker-compose -f docker-compose-dev.yml up -d
 
@@ -56,9 +56,9 @@ Some useful Docker commands::
 Usage
 ============
 
-Some quick notes on how to use the Open Wob API
+Some quick notes on how to use the Open Agenda API
 
-Running an Open Wob API extractor
+Running an Open Agenda API extractor
 ------------
 
 1. Make the necessary changes to the 'sources' settings file (``ocd_backend/sources.json``). For example, fill out any API keys you might need for specific APIs.
@@ -78,4 +78,4 @@ Automatic updating using cron
 
 The ``update.sh`` script contains the instructions to update indices. On the host machine run ``sudo crontab -e`` and add the following line::
 
-   $ 0 1,7,13,19 * * * sudo docker exec open-wob-api_backend_1 ./opt/owa/update.sh
+   $ 0 1,7,13,19 * * * sudo docker exec open-agenda-api_backend_1 ./opt/oaa/update.sh

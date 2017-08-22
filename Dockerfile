@@ -94,18 +94,18 @@ RUN apt-get install -y ffmpeg
 
 ##########
 
-WORKDIR /opt/owa
+WORKDIR /opt/oaa
 # Create a virtualenv project
 RUN echo 'ok'
 RUN virtualenv -q /opt
-RUN echo "source /opt/bin/activate; cd /opt/owa;" >> ~/.bashrc
+RUN echo "source /opt/bin/activate; cd /opt/oaa;" >> ~/.bashrc
 
-# Temporarily add all owa API files on the host to the container
+# Temporarily add all oaa API files on the host to the container
 # as it contains files needed to finish the base installation
-ADD . /opt/owa
+ADD . /opt/oaa
 
 # Install Python requirements
-COPY ocd_backend/requirements.txt /opt/owa/requirements.txt
+COPY ocd_backend/requirements.txt /opt/oaa/requirements.txt
 RUN source /opt/bin/activate \
     && pip install pycparser==2.13 \
     && pip install Cython==0.21.2 \
@@ -134,7 +134,7 @@ RUN apt-get install -y ruby ruby-dev tesseract-ocr tesseract-ocr-eng tesseract-o
 
 RUN gem install docsplit
 
-# Delete all owa API files again
+# Delete all oaa API files again
 RUN find . -delete
 RUN rm -rf /tmp/pdfparser /tmp/poppler
 
@@ -145,5 +145,5 @@ RUN adduser --disabled-password celery \
   && mkdir -p /var/run/celery \
   && chown celery:celery /var/run/celery
 USER celery
-WORKDIR /opt/owa/
+WORKDIR /opt/oaa/
 CMD source /opt/bin/activate && /opt/bin/celery --app=ocd_backend:celery_app worker --loglevel=info --concurrency=1
