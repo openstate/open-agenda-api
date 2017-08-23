@@ -18,11 +18,11 @@ Using `Docker Compose<https://docs.docker.com/compose/install/>`_ is by far the 
 
 2. Build and start the containers::
 
-If you're in production:
+If you're in production::
 
    $ docker-compose up -d
 
-If you're in development (this adds `command: /opt/oaa/bin/backend.sh` so celery gets reloaded on file changes):
+If you're in development (this adds `command: /opt/oaa/bin/backend.sh` so celery gets reloaded on file changes)::
 
    $ docker-compose -f docker-compose-dev.yml up -d
 
@@ -63,11 +63,7 @@ Running an Open Agenda API extractor
 
 1. Make the necessary changes to the 'sources' settings file (``ocd_backend/sources.json``). For example, fill out any API keys you might need for specific APIs.
 
-2. Start worker processes::
-
-   $ celery --app=ocd_backend:celery_app worker --loglevel=info --concurrency=2
-
-3. In another terminal (in case of Docker, use ``docker exec`` as described above), start the extraction process::
+2. In another terminal (in case of Docker, use ``docker exec`` as described above), start the extraction process::
 
    $ ./manage.py extract start <name_of_source>
 

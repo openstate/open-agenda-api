@@ -1,0 +1,16 @@
+[
+    {
+        "id": "bezoek_utrecht",
+        "extractor": "ocd_backend.extractors.bezoek_utrecht.BezoekUtrechtExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.bezoek_utrecht.BezoekUtrechtItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "bezoek_utrecht",
+        "url": "https://www.bezoek-utrecht.nl",
+        "keep_index_on_update": true
+    }
+]
