@@ -8,6 +8,6 @@ RUN apk add --update build-base python-dev py-pip jpeg-dev zlib-dev \
     && pip install --no-cache-dir -r requirements.txt \
     && apk del build-base python-dev py-pip
 
-COPY . /opt/ori/ocd_frontend
+COPY . /opt/oaa/ocd_frontend
 
 CMD python wsgi.py
