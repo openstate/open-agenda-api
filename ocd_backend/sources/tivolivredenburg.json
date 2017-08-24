@@ -1,0 +1,16 @@
+[
+    {
+        "id": "tivolivredenburg",
+        "extractor": "ocd_backend.extractors.tivolivredenburg.TivoliVredenburgExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.tivolivredenburg.TivoliVredenburgItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "tivolivredenburg",
+        "url": "https://www.tivolivredenburg.nl",
+        "keep_index_on_update": true
+    }
+]
