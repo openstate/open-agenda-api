@@ -68,7 +68,7 @@ COMBINED_INDEX = 'oaa_combined_index'
 # The default prefix used for all data
 DEFAULT_INDEX_PREFIX = 'oaa'
 
-RESOLVER_BASE_URL = 'http://api.openagenda.nl/v0/resolve'
+RESOLVER_BASE_URL = 'http://agenda-api.opencultuurdata.nl/v0/resolve'
 RESOLVER_URL_INDEX = 'oaa_resolver'
 
 # The User-Agent that is used when retrieving data from external sources

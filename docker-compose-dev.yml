@@ -20,6 +20,8 @@ services:
       dockerfile: Dockerfile
     links:
       - elasticsearch:elasticsearch
+    volumes:
+      - ./ocd_frontend:/opt/oaa/ocd_frontend
     networks:
       - oaa
       - nginx-load-balancer
@@ -58,7 +60,6 @@ services:
       - "5000:5000"
     volumes:
       - ./app:/opt/app
-    restart: always
     networks:
       - oaa
 volumes:

@@ -1,8 +1,7 @@
 FROM python:2.7-alpine
-MAINTAINER Jurrian Tromp <jurrian@argu.co>
 
-WORKDIR /opt/ori/ocd_frontend
-COPY requirements.txt /opt/ori/ocd_frontend/requirements.txt
+WORKDIR /opt/oaa/ocd_frontend
+COPY requirements.txt /opt/oaa/ocd_frontend/requirements.txt
 
 # Install build base for alpine including gcc for Pillow
 RUN apk add --update build-base python-dev py-pip jpeg-dev zlib-dev \

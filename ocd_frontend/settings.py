@@ -23,7 +23,7 @@ DEFAULT_INDEX_PREFIX = 'oaa'
 
 # The fields which can be used for sorting results via the REST API
 SORTABLE_FIELDS = {
-    'items': [
+    'item': [
         'meta.source_id',
         'meta.processing_started',
         'meta.processing_finished',
@@ -50,10 +50,10 @@ ALLOWED_INCLUDE_FIELDS_DEFAULT = []
 ALLOWED_INCLUDE_FIELDS_SEARCH = []
 
 SIMPLE_QUERY_FIELDS = {
-    'items': ['title','description']
+    'item': ['title','description']
 }
 
-DOC_TYPE_DEFAULT = u'items'
+DOC_TYPE_DEFAULT = u'item'
 
 # Definition of the ES facets (and filters) that are accessible through
 # the REST API
@@ -103,7 +103,7 @@ COMMON_FACETS = {
 }
 
 AVAILABLE_FACETS = {
-    'items': {
+    'item': {
         'date': {
             'date_histogram': {
                 'field': 'date',
@@ -173,7 +173,7 @@ COMMON_HIGHLIGHTS = {
 }
 
 AVAILABLE_HIGHLIGHTS = {
-    'items': {
+    'item': {
         'name': {}
     }
 }
@@ -202,7 +202,7 @@ API_URL = 'http://frontend:5000/v0/'
 
 # URL where collection dumps are hosted. This is used for generating full URLs
 # to dumps in the /dumps endpoint
-DUMP_URL = 'http://dumps.openagenda.nl/'
+DUMP_URL = 'http://agenda-dumps.opencultuurdata.nl/'
 
 LOGGING = {
     'version': 1,

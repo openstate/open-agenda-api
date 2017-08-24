@@ -3,7 +3,7 @@
   <div class="col-xs-12">
     <h2><a href="#">{{ result.title }}</a></h2>
     <p class="pull-left">{{ result.date|iso8601_to_str("%d-%m-%Y") }}</p>
-    <p class="pull-right"><a href="http://api.openagenda.nl/{{ result.meta._type }}/{{ result.meta._type }}/{{ result.meta.original_object_id }}" target="_blank">source</a></p>
+    <p class="pull-right"><a href="http://agenda-api.opencultuurdata.nl/{{ result.meta._type }}/{{ result.meta._type }}/{{ result.meta.original_object_id }}" target="_blank">source</a></p>
   </div>
 </div>
 <div class="row">

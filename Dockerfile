@@ -98,7 +98,7 @@ WORKDIR /opt/oaa
 # Create a virtualenv project
 RUN echo 'ok'
 RUN virtualenv -q /opt
-RUN echo "source /opt/bin/activate; cd /opt/oaa;" >> ~/.bashrc
+RUN echo "source /opt/bin/activate; cd /opt/oaa;" >> /etc/profile
 
 # Temporarily add all oaa API files on the host to the container
 # as it contains files needed to finish the base installation
