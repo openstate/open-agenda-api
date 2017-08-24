@@ -1,0 +1,16 @@
+[
+    {
+        "id": "nederlands_film_festival",
+        "extractor": "ocd_backend.extractors.nederlands_film_festival.NederlandsFilmFestivalExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.nederlands_film_festival.NederlandsFilmFestivalItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "nederlands_film_festival",
+        "url": "https://www.filmfestival.nl",
+        "keep_index_on_update": true
+    }
+]
