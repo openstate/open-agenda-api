@@ -1,0 +1,16 @@
+[
+    {
+        "id": "centraal_museum",
+        "extractor": "ocd_backend.extractors.centraal_museum.CentraalMuseumExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.centraal_museum.CentraalMuseumItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "centraal_museum",
+        "url": "http://www.centraalmuseum.nl",
+        "keep_index_on_update": true
+    }
+]
