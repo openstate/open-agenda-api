@@ -1,0 +1,16 @@
+[
+    {
+        "id": "stadsschouwburg_utrecht",
+        "extractor": "ocd_backend.extractors.stadsschouwburg_utrecht.StadsschouwburgUtrechtExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.stadsschouwburg_utrecht.StadsschouwburgUtrechtItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "stadsschouwburg_utrecht",
+        "url": "https://www.stadsschouwburg-utrecht.nl",
+        "keep_index_on_update": true
+    }
+]
