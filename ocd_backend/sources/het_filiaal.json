@@ -1,0 +1,16 @@
+[
+    {
+        "id": "het_filiaal",
+        "extractor": "ocd_backend.extractors.het_filiaal.HetFiliaalExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.het_filiaal.HetFiliaalItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "het_filiaal",
+        "url": "https://www.hetfiliaal.nl",
+        "keep_index_on_update": true
+    }
+]
