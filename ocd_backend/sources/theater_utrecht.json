@@ -1,0 +1,16 @@
+[
+    {
+        "id": "theater_utrecht",
+        "extractor": "ocd_backend.extractors.theater_utrecht.TheaterUtrechtExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.theater_utrecht.TheaterUtrechtItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "theater_utrecht",
+        "url": "http://www.theaterutrecht.nl",
+        "keep_index_on_update": true
+    }
+]
