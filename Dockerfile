@@ -48,14 +48,10 @@ RUN apt-get install -y \
         libtiff4-dev \
         libjpeg8-dev \
         liblcms2-dev \
-        python-dev \
-        python-setuptools \
         python-virtualenv \
-        git \
-        supervisor \
-        vim
+        supervisor
 
-RUN easy_install pip
+RUN pip install --upgrade pip
 
 ##### Install dependencies for pyav #####
 RUN apt-get update \
