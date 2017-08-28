@@ -187,7 +187,8 @@ def format_search_results(results, doc_type='item'):
         kwargs = {
             'object_id': hit['_id'],
             'source_id': hit['_source']['meta']['source_id'],
-            '_external': True
+            '_external': True,
+            '_scheme': 'https'
         }
         hit['_source']['meta']['oaa_url'] = url_for('api.get_object', **kwargs)
         for key in current_app.config['EXCLUDED_FIELDS_ALWAYS']:

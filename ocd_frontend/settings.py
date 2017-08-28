@@ -202,7 +202,7 @@ API_URL = 'http://frontend:5000/v0/'
 
 # URL where collection dumps are hosted. This is used for generating full URLs
 # to dumps in the /dumps endpoint
-DUMP_URL = 'http://agenda-dumps.opencultuurdata.nl/'
+#DUMP_URL = 'https://agenda-dumps.opencultuurdata.nl/'
 
 LOGGING = {
     'version': 1,
