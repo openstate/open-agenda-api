@@ -5,7 +5,7 @@ import urllib
 from ocd_backend.items import BaseItem
 
 
-class HetFiliaalItem(BaseItem):
+class HetFiliaalTheatermakersItem(BaseItem):
     def _get_text_or_none(self, xpath_expression):
         node = self.original_item.find(xpath_expression)
         if node is not None and node.text is not None:
@@ -35,7 +35,7 @@ class HetFiliaalItem(BaseItem):
         return u'Undefined'
 
     def get_collection(self):
-        return u'Het Filiaal'
+        return u'Het Filiaal theatermakers'
 
     def get_combined_index_data(self):
         combined_index_data = {

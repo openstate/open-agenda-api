@@ -5,7 +5,7 @@ from lxml import etree
 import re
 
 
-class HetFiliaalExtractor(BaseExtractor, HttpRequestMixin):
+class HetFiliaalTheatermakersExtractor(BaseExtractor, HttpRequestMixin):
     def get_collection_objects(self):
         url = self.source_definition['url']
 

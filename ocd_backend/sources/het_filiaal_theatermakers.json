@@ -1,15 +1,15 @@
 [
     {
-        "id": "het_filiaal",
-        "extractor": "ocd_backend.extractors.het_filiaal.HetFiliaalExtractor",
+        "id": "het_filiaal_theatermakers",
+        "extractor": "ocd_backend.extractors.het_filiaal_theatermakers.HetFiliaalTheatermakersExtractor",
         "transformer": "ocd_backend.transformers.BaseTransformer",
-        "item": "ocd_backend.items.het_filiaal.HetFiliaalItem",
+        "item": "ocd_backend.items.het_filiaal_theatermakers.HetFiliaalTheatermakersItem",
         "enrichers": [
         ],
         "loader": "ocd_backend.loaders.ElasticsearchLoader",
         "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
         "hidden": false,
-        "index_name": "het_filiaal",
+        "index_name": "het_filiaal_theatermakers",
         "url": "https://www.hetfiliaal.nl",
         "keep_index_on_update": true
     }
