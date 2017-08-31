@@ -1,0 +1,16 @@
+[
+    {
+        "id": "uitagenda_utrecht",
+        "extractor": "ocd_backend.extractors.uitagenda_utrecht.UitagendaUtrechtExtractor",
+        "transformer": "ocd_backend.transformers.BaseTransformer",
+        "item": "ocd_backend.items.uitagenda_utrecht.UitagendaUtrechtItem",
+        "enrichers": [
+        ],
+        "loader": "ocd_backend.loaders.ElasticsearchLoader",
+        "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
+        "hidden": false,
+        "index_name": "uitagenda_utrecht",
+        "url": "http://www.uitagendautrecht.nl",
+        "keep_index_on_update": true
+    }
+]
