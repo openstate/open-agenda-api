@@ -11,6 +11,6 @@
         "hidden": false,
         "index_name": "stadsschouwburg_utrecht",
         "url": "https://www.stadsschouwburg-utrecht.nl",
-        "keep_index_on_update": true
+        "keep_index_on_update": false
     }
 ]

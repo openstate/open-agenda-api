@@ -11,6 +11,6 @@
         "hidden": false,
         "index_name": "het_filiaal_theatermakers",
         "url": "https://www.hetfiliaal.nl",
-        "keep_index_on_update": true
+        "keep_index_on_update": false
     }
 ]

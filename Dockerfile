@@ -35,6 +35,9 @@ RUN apt-get update \
         inotify-tools \
         vim
 
+RUN locale-gen nl_NL.UTF-8
+RUN update-locale
+
 RUN add-apt-repository ppa:mc3man/trusty-media \
     && apt-get update \
     && apt-get dist-upgrade -y

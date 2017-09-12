@@ -11,6 +11,6 @@
         "hidden": false,
         "index_name": "ekko",
         "url": "https://www.ekko.nl",
-        "keep_index_on_update": true
+        "keep_index_on_update": false
     }
 ]

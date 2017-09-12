@@ -11,6 +11,6 @@
         "hidden": false,
         "index_name": "tivolivredenburg",
         "url": "https://www.tivolivredenburg.nl",
-        "keep_index_on_update": true
+        "keep_index_on_update": false
     }
 ]
