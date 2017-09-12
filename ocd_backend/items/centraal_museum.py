@@ -147,7 +147,6 @@ class CentraalMuseumItem(BaseItem):
             )
 
         # description
-        print main.xpath('./div[@class="textContent"]//text()')
         if main.xpath('./div[@class="textContent"]//text()'):
             index_data['description'] = unicode(
                 ' '.join(main.xpath('./div[@class="textContent"]//text()')).strip()
