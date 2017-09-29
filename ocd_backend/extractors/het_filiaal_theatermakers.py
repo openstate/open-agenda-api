@@ -2,6 +2,7 @@ from ocd_backend.extractors import BaseExtractor, HttpRequestMixin
 
 from lxml import etree
 
+import json
 import re
 
 
@@ -11,7 +12,6 @@ class HetFiliaalTheatermakersExtractor(BaseExtractor, HttpRequestMixin):
 
         all_links_xpath = ".//div[contains(@class,'agenda-item')]"
 
-        # Continue loop until a page contains no items
         resp = self.http_session.get('%s/agenda/' % (url))
         html = etree.HTML(resp.content)
 
@@ -28,12 +28,13 @@ class HetFiliaalTheatermakersExtractor(BaseExtractor, HttpRequestMixin):
                 if not link.startswith('http'):
                     link = url + link
 
-                yield link
+                yield {'url': link, 'agenda': item}
 
     def get_object(self, item_url):
-        resp = self.http_session.get(item_url)
+        resp = self.http_session.get(item_url['url'])
 
-        return 'application/html', resp.content
+        return_data = {'voorstelling': resp.content, 'agenda': etree.tostring(item_url['agenda'])}
+        return 'application/json', json.dumps(return_data)
 
     def run(self):
         for item_url in self.get_collection_objects():

@@ -10,7 +10,7 @@
         "cleanup": "ocd_backend.tasks.CleanupElasticsearch",
         "hidden": false,
         "index_name": "nederlands_film_festival",
-        "url": "https://www.filmfestival.nl",
+        "url": "https://programma.filmfestival.nl",
         "keep_index_on_update": false
     }
 ]

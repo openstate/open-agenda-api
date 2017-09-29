@@ -21,7 +21,7 @@ class CultuurhuisKanaleneilandExtractor(BaseExtractor, HttpRequestMixin):
         for item in items:
             link = item.xpath("span/a/@href")
             if link:
-                link = link[0]
+                link = link[0].strip()
 
                 # Add the base url if the link is a path (which is
                 # always the case afaik)

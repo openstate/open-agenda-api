@@ -1,7 +1,10 @@
 from datetime import datetime
+import json
+import microdata
 import re
 
 from ocd_backend.items import BaseItem
+from convert_microdata import microdataConverter
 
 
 class TivoliVredenburgItem(BaseItem):
@@ -41,7 +44,12 @@ class TivoliVredenburgItem(BaseItem):
         return combined_index_data
 
     def get_index_data(self):
-        return {}
+        index_data = microdataConverter().convert_items(
+            json.loads(microdata.get_items(self.data)[0].json())
+        )
+        index_data['@context'] = 'https://schema.org'
+
+        return index_data
 
     def get_all_text(self):
         text_items = []

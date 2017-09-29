@@ -1,7 +1,10 @@
 from datetime import datetime
+import json
+import microdata
 import re
 
 from ocd_backend.items import BaseItem
+from convert_microdata import microdataConverter
 
 
 class StadsschouwburgUtrechtItem(BaseItem):
@@ -13,28 +16,26 @@ class StadsschouwburgUtrechtItem(BaseItem):
     def get_original_object_id(self):
         # Use slug as object id; some slugs are longer than others so
         # do some checking to find out what parts to use
-        slug = self.original_item.xpath(
-                ".//link[@rel='canonical']/@href"
-        )[0].replace('//', '/').split('/')
+        #slug = self.original_item.xpath(
+        #        ".//link[@rel='canonical']/@href"
+        #)[0].replace('//', '/').split('/')
 
-        object_id = ''
+        #object_id = ''
 
-        add_to_id = False
-        for i in slug:
-            if re.match(r'^\d+$', i) and add_to_id == False:
-                add_to_id = True
-            if add_to_id:
-                object_id += '/' + i
+        #add_to_id = False
+        #for i in slug:
+        #    if re.match(r'^\d+$', i) and add_to_id == False:
+        #        add_to_id = True
+        #    if add_to_id:
+        #        object_id += '/' + i
 
-        return unicode(object_id.lstrip('/'))
+        #return unicode(object_id.lstrip('/'))
+
+        return unicode(re.search('sub-(\d{4})', self.original_item.xpath(".//body/@class")[0]).group(1))
 
     def get_original_object_urls(self):
-        url = unicode(
-            self.original_item.xpath(".//link[@rel='canonical']/@href")[0]
-        )
-
         return {
-            'html': url
+            'html': 'https://www.stadsschouwburg-utrecht.nl/programma/' + self.get_original_object_id()
         }
 
     def get_rights(self):
@@ -51,7 +52,12 @@ class StadsschouwburgUtrechtItem(BaseItem):
         return combined_index_data
 
     def get_index_data(self):
-        return {}
+        index_data = microdataConverter().convert_items(
+            json.loads(microdata.get_items(self.data)[0].json())
+        )
+        index_data['@context'] = 'https://schema.org'
+
+        return index_data
 
     def get_all_text(self):
         text_items = []

@@ -164,7 +164,7 @@ class BaseItem(object):
 
         hash_content = self.source_definition['id'] + object_id + u''.join(sorted(urls.values()))
 
-        return sha1(hash_content.decode('utf8')).hexdigest()
+        return sha1(hash_content.encode('utf8')).hexdigest()
 
     def get_combined_object_id(self):
         """Generates a new object ID which is used within OCD to identify

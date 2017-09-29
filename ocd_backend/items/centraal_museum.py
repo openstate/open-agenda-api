@@ -89,7 +89,8 @@ class CentraalMuseumItem(BaseItem):
     def get_index_data(self):
         # Fields follow Schema.org ExhibitionEvent (same as Event) properties
         index_data = {
-            'schema.org_type': 'https://schema.org/ExhibitionEvent'
+            '@context': 'https://schema.org',
+            '@type': 'ExhibitionEvent'
         }
 
         main = self.original_item.xpath(".//div[@class='main']/div[@class='inner']")[0]
@@ -116,14 +117,14 @@ class CentraalMuseumItem(BaseItem):
 
             if date_type == 3:
                 # This datetime type only occurs for normal events
-                index_data['schema.org_type'] = 'https://schema.org/Event'
+                index_data['@type'] = 'Event'
                 index_data['startDate'] = startDate
                 index_data['endDate'] = endDate
 
         # image and image contentUrl
         if main.xpath('./div[@class="imageContainer block"]/img/@src'):
             index_data['image'] = {}
-            index_data['image']['schema.org_type'] = unicode('https://schema.org/ImageObject')
+            index_data['image']['@type'] = unicode('ImageObject')
             index_data['image']['contentUrl'] = unicode(
                 'http://centraalmuseum.nl%s' % (
                     main.xpath('./div[@class="imageContainer block"]/img/@src')[0]

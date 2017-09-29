@@ -1,7 +1,10 @@
 from datetime import datetime
+import json
+import microdata
 import re
 
 from ocd_backend.items import BaseItem
+from convert_microdata import microdataConverter
 
 
 class UitagendaUtrechtItem(BaseItem):
@@ -14,17 +17,15 @@ class UitagendaUtrechtItem(BaseItem):
         # Use slug as object id; some slugs are longer than others so
         # do some checking to find out what parts to use
         slug = self.original_item.xpath(
-            ".//a[@class='i-facebook-share whatsapp no-popup']/@href"
-        )[0].split('http://')[-1].split('/')[-1]
+            ".//a[@class='i-facebook-share whatsapp no-popup']/@data-link"
+        )[0].split('/')[-1]
 
         return unicode(slug)
 
     def get_original_object_urls(self):
-        url = unicode(
-            'http://' + self.original_item.xpath(
-                ".//a[@class='i-facebook-share whatsapp no-popup']/@href"
-            )[0].split('http://')[-1]
-        )
+        url = unicode(self.original_item.xpath(
+            ".//a[@class='i-facebook-share whatsapp no-popup']/@data-link"
+        )[0])
 
         return {
             'html': url
@@ -44,7 +45,10 @@ class UitagendaUtrechtItem(BaseItem):
         return combined_index_data
 
     def get_index_data(self):
-        return {}
+        jsonstr = self.original_item.xpath('(.//script[@type="application/ld+json"]//text())[3]')[0]
+        index_data = json.loads(unicode(jsonstr), strict=False)
+
+        return index_data
 
     def get_all_text(self):
         text_items = []
