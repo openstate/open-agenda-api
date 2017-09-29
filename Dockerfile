@@ -24,7 +24,6 @@ RUN apt-get update \
         openjdk-7-jre-headless \
         wget \
         curl \
-        poppler-utils \
         software-properties-common \
         autoconf \
         automake \
@@ -110,32 +109,10 @@ RUN source /opt/bin/activate \
     && pip install Cython==0.21.2 \
     && pip install -r requirements.txt
 
-# Install poppler for pdfparser
-RUN git clone --depth 1 git://git.freedesktop.org/git/poppler/poppler /tmp/poppler
-RUN git clone https://github.com/izderadicka/pdfparser.git /tmp/pdfparser
-WORKDIR /tmp/poppler/
-RUN ./autogen.sh \
-  && ./configure --disable-poppler-qt4 --disable-poppler-qt5 --disable-poppler-cpp --disable-gtk-test --disable-splash-output --disable-utils \
-  && make \
-  && make install
-
-# Install pdfparser
-WORKDIR /tmp/pdfparser/
-RUN ldconfig /tmp/pdfparser \
-  && source /opt/bin/activate \
-  && POPPLER_ROOT=/tmp/poppler python setup.py install
-
 RUN apt-get install supervisor
-
-
-# Install Docsplit dependencies
-RUN apt-get install -y ruby ruby-dev tesseract-ocr tesseract-ocr-eng tesseract-ocr-nld graphicsmagick ImageMagick poppler-utils poppler-data ghostscript pdftk
-
-RUN gem install docsplit
 
 # Delete all oaa API files again
 RUN find . -delete
-RUN rm -rf /tmp/pdfparser /tmp/poppler
 
 # When the container is created or started run start.sh which starts
 # all required services and supervisor which starts celery and celerycam
