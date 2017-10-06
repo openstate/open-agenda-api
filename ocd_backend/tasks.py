@@ -67,5 +67,6 @@ class CleanupElasticsearch(BaseCleanup):
         es.indices.update_aliases(body=actions)
 
         # Remove old index
-        if current_index_name != new_index_name:
-            es.indices.delete(index=current_index_name)
+        # FIXME: we should not do this as we *want* to keep old indexes
+        # if current_index_name != new_index_name:
+        #     es.indices.delete(index=current_index_name)
