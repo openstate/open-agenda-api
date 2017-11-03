@@ -241,7 +241,7 @@ def format_sources_results(results):
 
     for bucket in results['aggregations']['index']['buckets']:
         source = {d['key']: d['doc_count'] for d in bucket['doc_type']['buckets']}
-        source['id'] = u'_'.join(bucket['key'].split('_')[1:-1])
+        source['id'] = u'_'.join(bucket['key'].split('_')[1:])
 
         # FIXME: quick hack
         if source['id'] == u'combined':
@@ -269,12 +269,14 @@ def list_sources():
         'aggregations': {
             'index': {
                 'terms': {
-                    'field': '_index'
+                    'field': '_index',
+                    'size': 100000
                 },
                 'aggregations': {
                     'doc_type': {
                         'terms': {
-                            'field': '_type'
+                            'field': '_type',
+                            'size': 100000
                         }
                     }
                 }
