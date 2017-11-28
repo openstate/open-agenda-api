@@ -2,18 +2,10 @@
 
 {% block content %}
 <article>
-  <div id="DC-search-projectid-19706-wob-besluiten" class="DC-search-container"></div>
-  <script src="//assets.documentcloud.org/embed/loader.js"></script>
-  <script>
-    dc.embed.load('https://www.documentcloud.org/search/embed/', {
-      q: "projectid: 19706-wob-besluiten ",
-      container: "#DC-search-projectid-19706-wob-besluiten",
-      title: "",
-      order: "created_at",
-      per_page: 8,
-      search_bar: true,
-      organization: 1253
-    });
-  </script>
+  <ul>
+    {% for key, value in results.items() | sort(attribute='1.total_items', reverse=true) %}
+    <li><a href="/{{ key }}/zoeken">{{ value['collection_name'] }}</a> ({{ value['total_items'] }} items; last updated {{ value['last_update'] }})</li>
+    {% endfor %}
+  </ul>
 </article>
 {% endblock %}

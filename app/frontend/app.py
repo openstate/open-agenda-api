@@ -16,22 +16,16 @@ import requests
 
 app = Flask(__name__)
 
-PAGE_SIZE = 20
+PAGE_SIZE = 10
 
 
 @app.template_filter('url_for_search_page')
-def do_url_for_search_page(gov_slug, page):
+def do_url_for_search_page(page, gov_slug):
     args = request.args.copy()
     args['page'] = page
     args['gov_slug'] = gov_slug
+    return 'zoeken?page=%s' % (page)
     return url_for(request.endpoint, **args)
-
-
-@app.template_filter('wordcloud_font_size')
-def do_wordcloud_fontsize(c, total):
-    max_size = 100 + 25 * math.log(total, 2)
-    cur_size = 100 + 25 * math.log(c, 2)
-    return '{p:.1f}%'.format(p=100 + ((cur_size * 100.0) / max_size))
 
 
 @app.template_filter('tk_questions_format')
@@ -63,7 +57,7 @@ def do_humanize(s):
 
 
 class BackendAPI(object):
-    URL = 'http://agenda-api.opencultuurdata.nl/v0'
+    URL = 'https://agenda-api.opencultuurdata.nl/v0'
 
     def sources(self):
         return requests.get('%s/sources' % (self.URL,)).json()
@@ -105,47 +99,10 @@ class BackendAPI(object):
             }
         return result
 
-    def stats_questions(self):
-        es_query = {
-            "size": 0,
-            "facets": {
-                "date": {
-                    "interval": "year"
-                },
-                "description": {"size": 200},
-                "answer_description": {"size": 200}
-            }
-        }
-
-        try:
-            result = requests.post(
-                '%s/tk_qa_matches/search' % (self.URL,),
-                data=json.dumps(es_query)).json()
-        except Exception:
-            result = {
-                'facets': {
-                    'dates': {
-                        'entries': []
-                    }
-                },
-                'hits': {
-                    'hits': [],
-                    'total': 0
-                }
-            }
-        return result
-
     def search_questions(self, gov_slug, query=None, page=1):
         es_query = {
-            "sort": "date",
-            "order": "desc",
             "from": (page - 1) * PAGE_SIZE,
-            "size": PAGE_SIZE,
-            "filters": {
-                'source': {
-                    'terms': [gov_slug]
-                }
-            }
+            "size": PAGE_SIZE
         }
 
         if query is not None:
@@ -153,7 +110,7 @@ class BackendAPI(object):
 
         try:
             result = requests.post(
-                '%s/search' % (self.URL,),
+                '%s/%s/search' % (self.URL, gov_slug),
                 data=json.dumps(es_query)).json()
         except Exception:
             result = {
@@ -163,6 +120,41 @@ class BackendAPI(object):
                 }
             }
         return result
+
+    def get_unique_sources(self):
+        result = requests.get(
+            '%s/sources' % (self.URL,)
+        ).json()
+        unique_sources = {}
+        for source in result['sources']:
+            source_id = source['id']
+            if source_id == 'combined_index':
+                continue
+            source_id_stripped = '_'.join(source_id.split('_')[:-1])
+            if source_id_stripped == 'het_filiaal':
+                continue
+            unique_sources[source_id_stripped] = 1
+        return unique_sources
+
+    def get_collection_stats(self):
+        query = {
+            "size": 1
+        }
+
+        collection_stats = {}
+
+        unique_sources = self.get_unique_sources()
+        for source in unique_sources:
+            collection_stats[source] = {}
+            result = requests.post(
+                '%s/%s/search' % (self.URL, source),
+                data=json.dumps(query)
+            ).json()
+            collection_stats[source]['collection_name'] = result['item'][0]['meta']['collection']
+            collection_stats[source]['last_update'] = result['item'][0]['meta']['processing_started'][:10]
+            collection_stats[source]['total_items'] = result['meta']['total']
+        return collection_stats
+
 
     def find_by_id(self, id):
         es_query = {
@@ -173,7 +165,7 @@ class BackendAPI(object):
         }
 
         return requests.post(
-            '%s/tk_qa_matches/search' % (self.URL,),
+            '%s/search' % (self.URL,),
             data=json.dumps(es_query)).json()
 
 api = BackendAPI()
@@ -181,13 +173,8 @@ api = BackendAPI()
 
 @app.route("/")
 def main():
-    return render_template('index.html')
-
-
-@app.route("/stats")
-def stats():
-    results = api.stats_questions()
-    return render_template('stats.html', results=results)
+    results = api.get_collection_stats()
+    return render_template('index.html', results=results)
 
 
 @app.route("/<gov_slug>")
@@ -203,8 +190,13 @@ def search(gov_slug):
     results = api.search_questions(gov_slug, query, page)
     max_pages = int(math.ceil(results['meta']['total'] / PAGE_SIZE))
     return render_template(
-        'search_results.html', results=results, query=query, page=page,
-        max_pages=max_pages)
+        'search_results.html',
+        results=results,
+        query=query,
+        page=page,
+        max_pages=max_pages,
+        gov_slug=gov_slug
+    )
 
 
 

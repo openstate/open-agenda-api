@@ -1,16 +1,23 @@
 {% for result in results.item %}
-<div class="row">
-  <div class="col-xs-12">
-    <h2><a href="#">{{ result.title }}</a></h2>
-    <p class="pull-left">{{ result.date|iso8601_to_str("%d-%m-%Y") }}</p>
-    <p class="pull-right"><a href="http://agenda-api.opencultuurdata.nl/{{ result.meta._type }}/{{ result.meta._type }}/{{ result.meta.original_object_id }}" target="_blank">source</a></p>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2><a href="#">{{ result.name }}</a></h2>
+      <span class="pull-right"><a href="{{ result.meta.oaa_url }}" target="_blank">source</a></span>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    {{ result.description }}
-  </div>
-</div>
+  {% for key, value in result.items() recursive %}
+    {% if key != 'enrichments' %}
+      {% if value is mapping %}
+      - <b>{{ key }}</b>
+        <div style="margin-left: 40px;">
+        {{ loop(value.items()) }}
+        </div>
+      {% else %}
+        <b>{{ key }}: </b> {{ value }}
+        <br>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 
 <nav id="pager" class="text-center">
@@ -20,7 +27,7 @@
       <a href="#" rel="prev">Vorige</a>
     {% else %}
     <li class="prev previous_page">
-      <a href="{{ (page - 1) |url_for_search_page(gov_slug) }}" rel="prev">Vorige</a>
+      <a href="{{ (page - 1) | url_for_search_page(gov_slug) }}" rel="prev">Vorige</a>
     {% endif %}
     </li>
     {% if page >= max_pages %}
@@ -28,7 +35,7 @@
       <a href="#" rel="next">Volgende</a>
     {% else %}
     <li class="next next_page">
-      <a href="{{ (page + 1) |url_for_search_page(gov_slug) }}" rel="next">Volgende</a>
+      <a href="{{ (page + 1) | url_for_search_page(gov_slug) }}" rel="next">Volgende</a>
     {% endif %}
     </li>
   </ul>
