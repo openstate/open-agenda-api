@@ -102,7 +102,9 @@ class BackendAPI(object):
     def search_questions(self, gov_slug, query=None, page=1):
         es_query = {
             "from": (page - 1) * PAGE_SIZE,
-            "size": PAGE_SIZE
+            "size": PAGE_SIZE,
+            "sort": "startDate",
+            "order": "asc"
         }
 
         if query is not None:
