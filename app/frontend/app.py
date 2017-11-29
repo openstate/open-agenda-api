@@ -20,12 +20,15 @@ PAGE_SIZE = 10
 
 
 @app.template_filter('url_for_search_page')
-def do_url_for_search_page(page, gov_slug):
+def do_url_for_search_page(page, gov_slug, query):
     args = request.args.copy()
     args['page'] = page
     args['gov_slug'] = gov_slug
-    return 'zoeken?page=%s' % (page)
-    return url_for(request.endpoint, **args)
+    path = 'zoeken?'
+    if query:
+        path += 'query=%s&' % (query)
+    path += 'page=%s' % (page)
+    return path
 
 
 @app.template_filter('tk_questions_format')
